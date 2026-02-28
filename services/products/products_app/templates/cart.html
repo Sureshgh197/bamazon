@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Bamazon</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <h1 class="logo">Bamazon</h1>
+            <div class="nav-right">
+                <a href="{% url 'products_app:products_browse' %}" class="nav-link">Products</a>
+                <a href="{% url 'products_app:manage_page' %}" class="nav-link">Manage</a>
+                <a href="{% url 'products_app:cart_page' %}" class="nav-link">Cart</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>Shopping Cart</h2>
+        
+        <div id="empty-cart-message" class="empty-cart-message" style="display: none;">
+            <p>Your cart is empty! <a href="{% url 'products_app:products_browse' %}">Continue shopping</a></p>
+        </div>
+
+        <div id="cart-items-container" class="cart-items-container" style="display: none;">
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-items-list">
+                    <!-- Cart items will be loaded here -->
+                </tbody>
+            </table>
+
+            <div class="cart-summary">
+                <h3>Order Summary</h3>
+                <p>Subtotal: <span id="subtotal">0.00</span></p>
+                <p>Tax (10%): <span id="tax">0.00</span></p>
+                <h4>Total: <span id="total">0.00</span></h4>
+                <button class="checkout-btn">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/api.js' %}"></script>
+    <script src="{% static 'js/cart.js' %}"></script>
+</body>
+</html>

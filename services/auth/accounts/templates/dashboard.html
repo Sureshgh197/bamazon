@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bamazon - Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-container">
+            <a href="{% url 'index' %}" style="text-decoration: none;"><h2 class="brand">Bamazon</h2></a>
+            <div class="nav-links">
+                <a href="{% url 'products' %}" class="nav-link">Products</a>
+                <a href="{% url 'cart' %}" class="nav-link">Cart</a>
+                <span id="cart-count" class="cart-count">0</span>
+                <div class="user-avatar" id="user-avatar" style="display:none; margin-left: 15px;">
+                    <div class="avatar-circle" id="avatar-circle"></div>
+                    <div class="dropdown-menu" id="dropdown-menu">
+                        <div class="dropdown-item" id="username-display"></div>
+                        <div class="dropdown-divider"></div>
+                        <a href="{% url 'orders' %}" class="dropdown-item">My Orders</a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item" id="logout-btn">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="dashboard-container">
+            <h1>Welcome to Bamazon!</h1>
+            
+            <div id="errorMessage" class="error-message" style="display:none;"></div>
+            <div id="successMessage" class="success-message" style="display:none;"></div>
+
+            <div class="profile-section">
+                <h2>Your Profile</h2>
+                <div id="profileInfo" class="profile-info">
+                    <p>Loading...</p>
+                </div>
+                <button id="editProfileBtn" class="btn btn-secondary">Edit Profile</button>
+            </div>
+
+            <!-- Edit Profile Form -->
+            <div id="editProfileForm" class="edit-profile-form" style="display:none;">
+                <h3>Edit Profile</h3>
+                <form id="profileUpdateForm">
+                    <div class="form-group">
+                        <label for="editFirstName">First Name:</label>
+                        <input type="text" id="editFirstName" name="first_name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editLastName">Last Name:</label>
+                        <input type="text" id="editLastName" name="last_name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editEmail">Email:</label>
+                        <input type="email" id="editEmail" name="email">
+                    </div>
+
+                    <div class="button-group">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <button type="button" id="cancelEditBtn" class="btn btn-secondary">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="info-section">
+                <h3>Quick Links</h3>
+                <div class="quick-links">
+                    <a href="{% url 'products' %}" class="btn btn-primary">Browse Products</a>
+                    <a href="{% url 'cart' %}" class="btn btn-secondary">View Cart</a>
+                    <a href="{% url 'manage_products' %}" class="btn btn-secondary" id="manageLink" style="display:none;">Manage Products (Admin)</a>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3>Available Features</h3>
+                <ul>
+                    <li>✓ User Registration & Authentication</li>
+                    <li>✓ Secure Token-based Login</li>
+                    <li>✓ Profile Management</li>
+                    <li>✓ Browse Products</li>
+                    <li>✓ Shopping Cart</li>
+                    <li>✓ Product Management (Admin)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/avatar.css' %}">
+    <script src="{% static 'js/config.js' %}"></script>
+    <script src="{% static 'js/api.js' %}"></script>
+    <script src="{% static 'js/avatar.js' %}"></script>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+    <script>
+        initializeAvatar();
+    </script>
+</body>
+</html>

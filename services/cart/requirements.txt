@@ -1,0 +1,6 @@
+Django==6.0.1
+djangorestframework==3.14.0
+django-cors-headers==4.2.0
+requests==2.31.0
+opentelemetry-distro==0.60b1
+opentelemetry-exporter-otlp==1.39.1

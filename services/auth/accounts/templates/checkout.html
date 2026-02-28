@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Bamazon</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/avatar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="{% url 'index' %}" style="text-decoration: none;"><h1 class="logo">Bamazon</h1></a>
+            <div class="nav-right">
+                <a href="{% url 'products' %}" class="nav-link">Products</a>
+                <a href="{% url 'manage_products' %}" class="nav-link">Manage</a>
+                <div class="user-avatar" id="user-avatar" style="display:none;">
+                    <div class="avatar-circle" id="avatar-circle"></div>
+                    <div class="dropdown-menu" id="dropdown-menu">
+                        <div class="dropdown-item" id="username-display"></div>
+                        <div class="dropdown-divider"></div>
+                        <a href="{% url 'orders' %}" class="dropdown-item">My Orders</a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item" id="logout-btn">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="checkout-container">
+        <h2>Checkout</h2>
+        
+        <div class="checkout-grid">
+            <div class="delivery-section">
+                <h3>Delivery Information</h3>
+                
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" id="delivery-name" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" id="delivery-phone" placeholder="Enter your phone number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Delivery Address *</label>
+                    <input type="text" id="address-search" placeholder="Search for your address..." autocomplete="off">
+                    <div id="map" style="height: 300px; margin-top: 10px; border-radius: 8px;"></div>
+                </div>
+                
+                <div class="address-details" id="address-details" style="display: none;">
+                    <p><strong>Selected Address:</strong></p>
+                    <p id="formatted-address"></p>
+                    <p id="address-components"></p>
+                </div>
+                
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select id="payment-method">
+                        <option value="COD">Cash on Delivery</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="order-summary-section">
+                <h3>Order Summary</h3>
+                <div id="order-items"></div>
+                <div class="summary-totals">
+                    <p>Subtotal: $<span id="subtotal">0.00</span></p>
+                    <p>Tax (10%): $<span id="tax">0.00</span></p>
+                    <h4>Total: $<span id="total">0.00</span></h4>
+                </div>
+                <button class="place-order-btn" id="place-order-btn">Place Order</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-XObvjOTH4qPYgtu55tLbf7CT8KM3OFg&libraries=places&callback=initMap" async defer></script>
+    <script src="{% static 'js/config.js' %}"></script>
+    <script src="{% static 'js/api.js' %}"></script>
+    <script src="{% static 'js/avatar.js' %}"></script>
+    <script src="{% static 'js/checkout.js' %}"></script>
+    <script>
+        initializeAvatar();
+    </script>
+</body>
+</html>

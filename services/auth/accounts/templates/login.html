@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bamazon - Login</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="auth-box">
+            <h1>Bamazon Login</h1>
+            
+            <form id="loginForm">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block" id="loginBtn">Login</button>
+                <div id="loadingSpinner" class="spinner" style="display:none;">
+                    <div class="spinner-text">Authenticating...</div>
+                </div>
+            </form>
+
+            <div id="message" class="message"></div>
+
+            <div class="auth-link">
+                <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+            </div>
+        </div>
+    </div>
+
+    {% load static %}
+    <script src="{% static 'js/config.js' %}"></script>
+    <script src="{% static 'js/api.js' %}"></script>
+    <script src="{% static 'js/login.js' %}"></script>
+</body>
+</html>

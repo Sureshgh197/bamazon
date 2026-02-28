@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - Bamazon</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/avatar.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="{% url 'index' %}" style="text-decoration: none;"><h1 class="logo">Bamazon</h1></a>
+            <div class="nav-right">
+                <a href="{% url 'products' %}" class="nav-link">Products</a>
+                <a href="{% url 'manage_products' %}" class="nav-link">Manage</a>
+                <a href="{% url 'cart' %}" class="nav-link">Cart <span id="cart-count" class="cart-count">0</span></a>
+                <div class="user-avatar" id="user-avatar" style="display:none;">
+                    <div class="avatar-circle" id="avatar-circle"></div>
+                    <div class="dropdown-menu" id="dropdown-menu">
+                        <div class="dropdown-item" id="username-display"></div>
+                        <div class="dropdown-divider"></div>
+                        <a href="{% url 'orders' %}" class="dropdown-item">My Orders</a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item" id="logout-btn">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="products-container">
+        <h2>My Orders</h2>
+        
+        <div id="orders-list">
+            <!-- Orders will be loaded here -->
+        </div>
+    </div>
+
+    <script src="{% static 'js/config.js' %}"></script>
+    <script src="{% static 'js/api.js' %}"></script>
+    <script src="{% static 'js/avatar.js' %}"></script>
+    <script src="{% static 'js/orders.js' %}"></script>
+    <script>
+        initializeAvatar();
+    </script>
+</body>
+</html>

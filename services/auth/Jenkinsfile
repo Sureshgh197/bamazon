@@ -1,0 +1,20 @@
+pipeline{
+    agent any
+    
+    stages{
+        stage('Build Image'){
+            steps{
+                
+                bat 'docker build -t bamazon:authv$BUILD_NUMBER .'                
+                
+            }
+        }
+        stage('Run Container'){
+            steps{
+                
+                bat 'docker run -d -p 8000:8000 --name b-authv$BUILD_NUMBER bamazon:authv$BUILD_NUMBER'               
+                
+            }
+        }
+    }
+}

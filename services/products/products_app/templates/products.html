@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bamazon - Browse Products</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <h1 class="logo">Bamazon</h1>
+            <div class="nav-right">
+                <a href="{% url 'products_app:products_browse' %}" class="nav-link">Products</a>
+                <a href="{% url 'products_app:manage_page' %}" class="nav-link">Manage</a>
+                <a href="{% url 'products_app:cart_page' %}" class="nav-link">Cart</a>
+                <span id="cart-count" class="cart-count">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="categories-section">
+            <h2>Categories</h2>
+            <div class="category-list" id="category-list">
+                <button class="category-btn active" data-category-id="">All Products</button>
+            </div>
+        </div>
+
+        <div class="products-section">
+            <h2>Products</h2>
+            <div class="products-grid" id="products-grid">
+                <!-- Products will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/api.js' %}"></script>
+    <script src="{% static 'js/products.js' %}"></script>
+</body>
+</html>

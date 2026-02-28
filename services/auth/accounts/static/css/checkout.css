@@ -1,0 +1,139 @@
+.checkout-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.checkout-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.delivery-section, .order-summary-section {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.delivery-section h3, .order-summary-section h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: #ff9900;
+}
+
+#map {
+    border: 1px solid #ddd;
+}
+
+.address-details {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.address-details p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+#order-items {
+    margin-bottom: 20px;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.item-name {
+    font-weight: 500;
+}
+
+.item-quantity {
+    color: #666;
+    font-size: 14px;
+}
+
+.summary-totals {
+    border-top: 2px solid #eee;
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+.summary-totals p {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 0;
+}
+
+.summary-totals h4 {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0 0 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.place-order-btn {
+    width: 100%;
+    padding: 15px;
+    background: #ff9900;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.place-order-btn:hover {
+    background: #e68a00;
+}
+
+.place-order-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .checkout-grid {
+        grid-template-columns: 1fr;
+    }
+}
