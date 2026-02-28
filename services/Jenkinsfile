@@ -1,0 +1,47 @@
+pipeline {
+    agent {
+        label 'custom-agent'
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/Sureshgh197/bamazon.git', branch: 'main'
+
+            }
+        }
+        
+        stage('Build Image from Compose') {
+             steps {
+                echo 'Building Docker image...'
+                sh 'docker compose -f docker-compose.yaml up --build -d'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                sh 'echo "Test step executed"'
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+                sh 'echo "Deploy step executed"'
+            }
+        }
+    }
+    
+    post {
+        always {
+            cleanWs()
+        }
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
