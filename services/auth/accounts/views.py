@@ -11,6 +11,33 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from .serializers import UserSerializer, UserRegistrationSerializer, LoginSerializer
 
 
+from opentelemetry.sdk.metrics import MeterProvider, Meter
+from opentelemetry import metrics
+from opentelemetry.sdk.resources import Resource
+from opentelemetry.exporter.otlp.proto.grpc.metric_exporter import OTLPMetricExporter
+from opentelemetry.sdk.metrics.export import PeriodicExportingMetricReader
+from opentelemetry.semconv.resource import ResourceAttributes
+
+# Create a Resource with the service.name attribute
+resource = Resource.create({ResourceAttributes.SERVICE_NAME: "auth-service"})
+# Metrics
+exporter = OTLPMetricExporter(endpoint="http://bmz-otel-collector:4317", insecure=True)
+reader = PeriodicExportingMetricReader(exporter,export_interval_millis=10000)
+meterProvider = MeterProvider(resource=resource,metric_readers=[reader])
+metrics.set_meter_provider(meterProvider)
+meter = metrics.get_meter(__name__)
+
+homePage_request_count = meter.create_counter(name='app_homePage_count', description="Counts the requests to home-page-service",unit='1')
+
+login_request_count = meter.create_counter(name='app_login_count', description="Counts the requests to login-service",unit='1')
+loginPage_request_count = meter.create_counter(name='app_loginPage_count', description="Counts the requests to login-page-service",unit='1')
+
+reg_request_count = meter.create_counter(name='app_reg_count', description="Counts the requests to register-service",unit='1')
+logout_request_count = meter.create_counter(name='app_logout_count', description="Counts the requests to logout-service",unit='1')
+
+productsPage_request_count = meter.create_counter(name='app_productsPage_count', description="Counts the requests to products-page-service",unit='1')
+
+
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def register(request):
@@ -22,6 +49,7 @@ def register(request):
     if serializer.is_valid():
         user = serializer.save()
         token, created = Token.objects.get_or_create(user=user)
+        reg_request_count.add(1)
         return Response({
             'message': 'User registered successfully',
             'user': UserSerializer(user).data,
@@ -43,6 +71,7 @@ def login(request):
     if serializer.is_valid():
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
+        login_request_count.add(1)
         return Response({
             'message': 'Login successful',
             'user': UserSerializer(user).data,
@@ -59,6 +88,7 @@ def logout(request):
     POST /api/auth/logout/
     Requires: Authentication token in header
     """
+    logout_request_count.add(1)
     return Response({
         'message': 'Logout successful'
     }, status=status.HTTP_200_OK)
@@ -124,6 +154,7 @@ def get_user_by_id(request, user_id):
 @require_http_methods(["GET"])
 def index(request):
     """Home page"""
+    homePage_request_count.add(1)
     return render(request, 'index.html')
 
 
@@ -132,6 +163,7 @@ def index(request):
 def login_page(request):
     """Login page"""
     if request.user.is_authenticated:
+        loginPage_request_count.add(1)
         return redirect('dashboard')
     return render(request, 'login.html')
 
@@ -155,6 +187,7 @@ def dashboard(request):
 @require_http_methods(["GET"])
 def products_page(request):
     """Browse products page"""
+    productsPage_request_count.add(1)
     return render(request, 'products.html')
 
 

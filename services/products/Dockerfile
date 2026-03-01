@@ -14,7 +14,7 @@ RUN opentelemetry-bootstrap -a install
 
 ENV DEBUG=True
 ENV OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED=true
-ENV OTEL_EXPORTER_OTLP_ENDPOINT=https://bmz-otel-collector:4317
+ENV OTEL_EXPORTER_OTLP_ENDPOINT=http://bmz-otel-collector:4317
 
 
 EXPOSE 8001
