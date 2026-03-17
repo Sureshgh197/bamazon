@@ -1,4 +1,16 @@
 services:
+  bmz-cicd:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    restart: always
+    ports:
+      - "8080:8080"      # Web Interface
+      - "50000:50000"    # Agent Communication
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    environment:
+      - TZ=UTC
+  
   bmz-auth:
     build:
       context: ./auth
@@ -7,6 +19,8 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE=auth.settings
       - DEBUG=True
+    depends_on:
+      - bmz-cicd
     networks:
       - bmz_network
   bmz-prod:
@@ -84,3 +98,6 @@ services:
 
 networks:
   bmz_network:
+
+volumes:
+  jenkins_home:
