@@ -1,4 +1,17 @@
 services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - bmz-auth
+      - bmz-prod
+      - bmz-cart
+      - bmz-orders
+    networks:
+      - bmz_network
   bmz-auth:
     build:
       context: ./auth
