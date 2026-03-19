@@ -7,8 +7,6 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE=auth.settings
       - DEBUG=True
-    depends_on:
-      - bmz-cicd
     networks:
       - bmz_network
   bmz-prod:
@@ -86,6 +84,3 @@ services:
 
 networks:
   bmz_network:
-
-volumes:
-  jenkins_home:
